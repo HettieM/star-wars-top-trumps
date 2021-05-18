@@ -1,0 +1,25 @@
+.card {
+  /* background-color: red; */
+  border: 3px solid black;
+  max-width: 400px;
+  border-radius: 5px;
+  margin: 2%;
+  padding: 2%;
+}
+
+.category {
+  font-weight: 700;
+  /* border: 1px solid black; */
+  text-align: left;
+}
+
+.data {
+  font-weight: 300;
+  text-align: center;
+  margin-left: 4px;
+  /* border: 1px solid black; */
+}
+
+.classification {
+  display: flex;
+}
