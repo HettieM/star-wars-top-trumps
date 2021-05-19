@@ -25,8 +25,8 @@ const numberQuery = (gql`{
 
 const GetData = () => {
   const { loading, error, data } = useQuery(numberQuery);
-  // if (loading) return 'loading';
-  // if (error) return error;
+  if (loading) return 'loading';
+  if (error) return 'error';
   if (data) return data;
 }
 
@@ -41,7 +41,7 @@ const GetStarship = () => {
 
   if (!starships && !cards) {
     const data = GetData();
-    if (data) {
+    if (data !== 'loading' && data !== 'error') {
       const starshipWithFilmNo = data.allStarships.starships.map((starship) => {
         const filmNo = starship.filmConnection.edges.length;
         return {...starship, films:filmNo}
