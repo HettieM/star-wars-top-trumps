@@ -8,6 +8,7 @@
 .card {
   border: 3px solid black;
   width: 300px;
+  max-width: 90vw;
   border-radius: 5px;
   margin: 2%;
   padding: 2%;
