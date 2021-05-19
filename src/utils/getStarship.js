@@ -1,37 +1,65 @@
 import React from "react";
+import Context from '../store/context';
 import { useQuery, gql } from "@apollo/client";
-import Card from '../components/card';
 
-
-const starshipQuery = (number) => {
-  return (gql`
-  query getStarship {
-    starship(starshipID: "${number}") {
-      name
-      starshipClass
-      maxAtmospheringSpeed
-      costInCredits
-      passengers
+const numberQuery = (gql`{
+    allStarships {
+      totalCount
+      starships {
+        name
+        starshipClass
+        maxAtmospheringSpeed
+        costInCredits
+        passengers
+        filmConnection {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+      }
     }
-  }`)
+  }`
+)
+
+const GetData = () => {
+  const { loading, error, data } = useQuery(numberQuery);
+  // if (loading) return 'loading';
+  // if (error) return error;
+  if (data) return data;
 }
 
-// const starshipsUsed = {};
+const GetStarship = () => {
+  const {state, actions} = React.useContext(Context);
+  let response = 'loading...';
+  let cards = state.cardsLeft;
+  let starships = state.starshipsLeft;
+  let newState = state;
 
-const randomNumber = () => {
-  return Math.floor(Math.random() * 36);
-}
+  if (cards === 0) response = 'no more cards';
 
-const GetStarship = (props) => {
-  const number = randomNumber();
-  const query = starshipQuery(number);
-  const { loading, error, data } = useQuery(query);
-
-    // if (loading) return 'loading';
-    // if (error) return 'error';
+  if (!starships && !cards) {
+    const data = GetData();
     if (data) {
-      return data.starship;
+      newState = {...state, cardsLeft: data.allStarships.totalCount, starshipsLeft: data.allStarships.starships};
     }
-};
+    response = 'loading';
+  }
+
+  if (starships && cards) {
+    const index = Math.floor(Math.random() * cards);
+    response = starships[index];
+    if (response === state.playerVals) {
+      if (index !== 0) response = starships[0];
+    };
+  }
+
+  actions({
+    type: 'setState',
+    payload: newState,
+  });
+  return response;
+}
 
 export default GetStarship;

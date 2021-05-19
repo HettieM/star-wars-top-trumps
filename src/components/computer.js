@@ -44,7 +44,7 @@ function Computer(props) {
     const starship = state.compVals;
     if (state.compVals && state.showComp && state.playerVals) {
       return (
-        <div className="Player">
+        <div className="computer column">
           <Card 
             name={starship.name}
             starshipClass={starship.starshipClass}

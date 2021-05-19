@@ -7,8 +7,10 @@ import Score from './components/score';
 function App() {
   return (
     <div className="App">
-      <Player />
-      <Computer />
+      <div className="row">
+        <Player />
+        <Computer />
+      </div>
       <Score />
     </div>
   );

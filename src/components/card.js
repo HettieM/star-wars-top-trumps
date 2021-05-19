@@ -9,7 +9,6 @@ function Card(props) {
     <div className="wrapper">
       <div className="card card-1">
         <h1 className="name classification">
-          <span className="key">Name: </span>
           <span className="value">{name || "N/A"}</span>
         </h1>
         <p className="starshipClass classification">
@@ -31,8 +30,9 @@ function ClickableClassification(props) {
 
   return (
     <p className={"classification " + className}>
-      <span className="category selectable" onClick={() => {
+      <span className="category selectable" onClick={(e) => {
         if (!player || state.compVals) return;
+        e.target.classList.add('highlight');
         actions({
           type: 'setState',
           payload: {...state, showComp: true, category: className}

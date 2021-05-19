@@ -2,12 +2,13 @@ import React from 'react';
 import GetStarship from '../utils/getStarship';
 import Card from './card';
 import Context from '../store/context';
+import './card.css';
 
 function Player(props) {
-  const {state, actions} = React.useContext(Context);
+  let {state, actions} = React.useContext(Context);
   if (!state.playerVals) {
-    const starship = GetStarship();
-    if (starship === "loading") return;
+  const starship = GetStarship();
+    if (starship === "loading") return (<p>loading...</p>);
     if (starship) {
       actions({
         type: 'setState',
@@ -19,7 +20,7 @@ function Player(props) {
   const starship = state.playerVals
   if (starship) {
     return (
-      <div className="Player">
+      <div className="player column">
         <Card 
           name={starship.name}
           starshipClass={starship.starshipClass}

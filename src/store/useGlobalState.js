@@ -4,6 +4,11 @@ const useGlobalState = () => {
   const [state, setState] = useState({
     showComp: false,
     score: 0,
+    cardsLeft: null,
+    starshipsLeft: null,
+    compVals: null,
+    playerVals: null,
+    result: null,
   })
 
   const actions = (action) => {
