@@ -42,7 +42,11 @@ const GetStarship = () => {
   if (!starships && !cards) {
     const data = GetData();
     if (data) {
-      newState = {...state, cardsLeft: data.allStarships.totalCount, starshipsLeft: data.allStarships.starships};
+      const starshipWithFilmNo = data.allStarships.starships.map((starship) => {
+        const filmNo = starship.filmConnection.edges.length;
+        return {...starship, films:filmNo}
+      })
+      newState = {...state, cardsLeft: data.allStarships.totalCount, starshipsLeft: starshipWithFilmNo};
     }
     response = 'loading';
   }
@@ -50,7 +54,7 @@ const GetStarship = () => {
   if (starships && cards) {
     const index = Math.floor(Math.random() * cards);
     response = starships[index];
-    if (response === state.playerVals) {
+    if (starships[index] === state.playerVals) {
       if (index !== 0) response = starships[0];
     };
   }

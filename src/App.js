@@ -7,7 +7,7 @@ import Score from './components/score';
 function App() {
   return (
     <div className="App">
-      <div className="row">
+      <div className="card-row">
         <Player />
         <Computer />
       </div>
