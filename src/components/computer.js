@@ -5,7 +5,11 @@ import Context from '../store/context';
 
 function Computer(props) {
   const {state, actions} = React.useContext(Context);
-  if (!state.showComp) return 'Please pick a category to play...';
+  if (!state.showComp) {
+    return (
+      <p>Please pick a category to play...</p>
+    )
+  };
 
   if (state.showComp && !state.compVals) {
     const starship = GetStarship();
