@@ -23,6 +23,10 @@
   font-weight: 700;
 }
 
+.selectable:hover {
+  cursor: pointer;
+}
+
 .data {
   font-weight: 300;
   margin-left: 4px;
